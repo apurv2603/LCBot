@@ -1,15 +1,17 @@
 // Require the necessary discord.js classes
-require("dotenv").config();
-
-const fs = require("node:fs");
-const path = require("node:path");
-const {
+import "dotenv/config";
+import fs from "node:fs";
+import path from "node:path";
+import {
   Client,
   Collection,
   Events,
   GatewayIntentBits,
   MessageFlags,
-} = require("discord.js");
+} from "discord.js";
+import { fileURLToPath, pathToFileURL } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const { env } = process;
 // console.log(env.DISCORD_TOKEN);
 // Create a new client instance
@@ -32,7 +34,8 @@ for (const folder of commandFolders) {
     .filter((file) => file.endsWith(".js"));
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
+    const mod = await import(pathToFileURL(filePath).href);
+    const command = mod.default ?? mod;
     // Set a new item in the Collection with the key as the command name and the value as the exported module
     if ("data" in command && "execute" in command) {
       client.commands.set(command.data.name, command);
