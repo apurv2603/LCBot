@@ -1,0 +1,21 @@
+{
+  "today": "2026-01-13",
+  "group": {
+    "streak": 0,
+    "lastCompletedDate": null
+  },
+  "users": {
+    "801820390397575209": {
+      "lc": "apurvsinghdeo",
+      "streak": 0,
+      "lastCompletedDate": null
+    }
+  },
+  "history": {
+    "2026-01-13": {
+      "link": "https://leetcode.com/problems/separate-squares-i/",
+      "greeting": "Happy Yennayer (Berbers)!",
+      "completedBy": {}
+    }
+  }
+}
