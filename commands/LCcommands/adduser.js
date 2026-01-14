@@ -19,7 +19,7 @@ const data = new SlashCommandBuilder()
 async function execute(interaction) {
   const Distag = interaction.user.username;
   const DisID = interaction.user.id;
-  const LCtag = interaction.options._hoistedOptions[0].value;
+  const LCtag = interaction.options.getString("lcusername");
   //need to check if the LCtag is valid leetcode username.this will be done by checking the leetcode API for if the username is valid
   const valid = await VerifyLCUser(LCtag);
   if (valid == null) {
@@ -27,7 +27,7 @@ async function execute(interaction) {
   } else {
     //map Discord ID DId to LCtag and this is a 1 to 1 relationship each discord user can have exactly one LCtag and vice versa.
     const db = getDB();
-    db.users[DisID] = { lc: LCtag, streak: 0, lastCompletedDate: null };
+    db.users[DisID] = { lc: LCtag, streak: 0 };
     saveDB();
     await interaction.reply("binded " + Distag + " to " + LCtag);
   }

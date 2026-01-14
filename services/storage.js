@@ -10,7 +10,7 @@ const DB_PATH = path.join(__dirname, "db.json");
 
 const DEFAULT_DB = {
   today: null,
-  group: { streak: 0, lastCompletedDate: null },
+  groupStreak: 0,
   users: {},
   history: {},
 };
@@ -55,6 +55,7 @@ export { getDB, saveDB };
 //   history: {
 //     [date: "YYYY-MM-DD"]: {
 //       link: string,
+//       titleSlug: string
 //       greeting: string,
 //       completedBy: {
 //         [discordId: string]: true   // set of who completed that date

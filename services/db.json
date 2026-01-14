@@ -1,21 +1,39 @@
 {
-  "today": "2026-01-13",
-  "group": {
-    "streak": 0,
-    "lastCompletedDate": null
-  },
+  "today": "2026-01-14",
+  "groupStreak": 8,
   "users": {
+    "1": {
+      "lc": "dhirajk1",
+      "streak": 0,
+      "lastCompletedDate": null
+    },
+    "2": {
+      "lc": "Mushr00m",
+      "streak": 0,
+      "lastCompletedDate": null
+    },
     "801820390397575209": {
       "lc": "apurvsinghdeo",
-      "streak": 0,
+      "streak": 8,
       "lastCompletedDate": null
     }
   },
   "history": {
     "2026-01-13": {
       "link": "https://leetcode.com/problems/separate-squares-i/",
-      "greeting": "Happy Yennayer (Berbers)!",
+      "titleSlug": "separate-squares-i",
+      "greeting": "Happy Liberation Day (Togo)!",
       "completedBy": {}
+    },
+    "2026-01-14": {
+      "link": "https://leetcode.com/problems/separate-squares-ii/",
+      "titleSlug": "separate-squares-ii",
+      "greeting": "Happy Christian feast day:\nBarba'shmin!",
+      "completedBy": {
+        "1": false,
+        "2": false,
+        "801820390397575209": true
+      }
     }
   }
 }
