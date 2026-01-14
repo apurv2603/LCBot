@@ -1,4 +1,3 @@
-// storage.js (ESM) - minimal + atomic save
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -15,12 +14,32 @@ const DEFAULT_DB = {
   history: {},
 };
 
-let db = DEFAULT_DB;
+let db;
 
-if (fs.existsSync(DB_PATH)) {
-  db = JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
-} else {
-  fs.writeFileSync(DB_PATH, JSON.stringify(DEFAULT_DB, null, 2), "utf8");
+// helper: create db.json from DEFAULT_DB
+function writeDefaultDB() {
+  db = structuredClone(DEFAULT_DB);
+  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), "utf8");
+}
+
+// Load DB
+try {
+  if (!fs.existsSync(DB_PATH)) {
+    writeDefaultDB();
+  } else {
+    const raw = fs.readFileSync(DB_PATH, "utf8").trim();
+
+    // if file exists but is empty/whitespace
+    if (!raw) {
+      writeDefaultDB();
+    } else {
+      db = JSON.parse(raw);
+    }
+  }
+} catch (err) {
+  // If JSON is corrupted, recover by recreating file
+  console.error("DB load failed, recreating db.json:", err.message);
+  writeDefaultDB();
 }
 
 function getDB() {

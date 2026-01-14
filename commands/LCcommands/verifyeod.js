@@ -17,17 +17,14 @@ const data = new SlashCommandBuilder()
 async function execute(interaction) {
   await interaction.deferReply();
   const db = getDB();
-  const users = db.users;
   const today = db.today;
-  const dailySlug = db.history[today].titleSlug;
   const completedBy = {};
   let groupComplete = false;
   let streakToId = {};
-  console.log(dailySlug);
-  for (const [DId, value] of Object.entries(users)) {
+  for (const [DId, value] of Object.entries(db.users)) {
     const lcTag = value.lc;
     let streak = 0;
-    if (await CompletedDaily(lcTag, dailySlug)) {
+    if (await CompletedDaily(lcTag, db.history[today].titleSlug)) {
       groupComplete = true;
       completedBy[DId] = true;
       streak = value.streak + 1;
@@ -50,7 +47,6 @@ async function execute(interaction) {
   db.history[today].completedBy = completedBy;
   //now I need the ordering sorted by streaks. to do this I should have dictionary where keys are streaks and values are
   // array of discord Id's with that streak. Then sort the keys and have output based on sorted order
-  console.log(streakToId);
   //now I sort the keys and have order based on that
   const sortedStreak = Object.keys(streakToId).sort().reverse();
   let msg = `Your group is on a ${db.groupStreak} day streak! 🔥 Here are the results:\n👑 `;

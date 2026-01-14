@@ -52,7 +52,6 @@ export async function execute(interaction) {
   //       }
   //     }
   //   }
-  console.log(dailyProb.question.titleSlug);
   db.history[dailyProb.date] = {
     link: link,
     titleSlug: dailyProb.question.titleSlug,
