@@ -10,6 +10,7 @@ import {
   MessageFlags,
 } from "discord.js";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { startPingScheduler } from "./services/scheduler.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const { env } = process;
@@ -21,6 +22,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+  startPingScheduler(readyClient);
 });
 
 client.commands = new Collection();

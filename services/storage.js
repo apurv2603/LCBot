@@ -16,20 +16,16 @@ const DEFAULT_DB = {
 
 let db;
 
-// helper: create db.json from DEFAULT_DB
 function writeDefaultDB() {
   db = structuredClone(DEFAULT_DB);
   fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), "utf8");
 }
 
-// Load DB
 try {
   if (!fs.existsSync(DB_PATH)) {
     writeDefaultDB();
   } else {
     const raw = fs.readFileSync(DB_PATH, "utf8").trim();
-
-    // if file exists but is empty/whitespace
     if (!raw) {
       writeDefaultDB();
     } else {
@@ -37,7 +33,6 @@ try {
     }
   }
 } catch (err) {
-  // If JSON is corrupted, recover by recreating file
   console.error("DB load failed, recreating db.json:", err.message);
   writeDefaultDB();
 }
