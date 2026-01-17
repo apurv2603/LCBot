@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { test } from "./daily.js";
+import { sendDaily } from "./daily.js";
 import { checkup } from "./checkup.js";
 let pingTask = null;
 let pongTask = null;
@@ -12,7 +12,7 @@ export function startPingScheduler(client) {
     pingTask = cron.schedule(
       "*/1 * * * *",
       async () => {
-        await test(client);
+        await sendDaily(client);
       },
       {
         timezone: "Asia/Dubai",

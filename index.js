@@ -22,7 +22,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-  startPingScheduler(readyClient);
+  // startPingScheduler(readyClient);
 });
 
 client.commands = new Collection();
