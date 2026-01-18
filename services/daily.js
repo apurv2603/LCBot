@@ -51,5 +51,4 @@ export async function sendDaily(client) {
   const message = await channel.send(greeting);
   const thread = await message.startThread({ name: title });
   await thread.send(reply);
-  console.log("success!");
 }

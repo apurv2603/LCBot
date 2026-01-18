@@ -1,14 +1,6 @@
 import { getDB, saveDB } from "./storage.js";
 import { CompletedDaily } from "./leetcode.js";
 
-async function checkup(client) {
-  const channelId = process.env.CHANNEL_ID;
-  const channel = await client.channels.fetch(channelId);
-  await channel.send("new pong");
-}
-
-export { checkup };
-
 async function CompletionMsg() {
   const db = getDB();
   const today = db.today;
@@ -66,5 +58,4 @@ export async function sendCompletionMsg(client) {
     return;
   }
   await channel.send(msg);
-  console.log("done!");
 }
