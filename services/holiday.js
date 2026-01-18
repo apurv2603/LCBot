@@ -10,13 +10,13 @@ export async function getHoliday(mm, dd) {
   }
   const data = await res.json();
   const holidays = data.holidays ?? [];
-  if (holidays.length === 0) {
+  let filtered = holidays.filter((h) => (h?.text ?? "").length < 45);
+  filtered = filtered.filter((h) => !(h?.text ?? "").includes("Christian"));
+
+  if (filtered.length === 0) {
     return "Happy coding!";
   }
-  let pick = holidays[Math.floor(Math.random() * holidays.length)];
-  while (pick.text.length > 45) {
-    pick = holidays[Math.floor(Math.random() * holidays.length)];
-  }
+  let pick = filtered[Math.floor(Math.random() * filtered.length)];
   return `Happy ${pick.text}!`;
 }
 
