@@ -1,7 +1,5 @@
 //need a function to authenticate LC username
 import axios from "axios";
-import { getDB, saveDB } from "./storage.js";
-import { getHoliday } from "./holiday.js";
 
 // curl 'https://leetcode.com/graphql' \
 // -H 'content-type: application/json' \
@@ -39,7 +37,7 @@ export async function VerifyLCUser(username) {
 //   "variables": {}
 // }'
 // that is the curl command now we need to just make it js function
-async function getDaily() {
+export async function getDaily() {
   const endpoint = "https://leetcode.com/graphql";
   const query = `query questionOfToday {
       activeDailyCodingChallengeQuestion {
@@ -54,47 +52,6 @@ async function getDaily() {
     throw new Error(data.data.errors[0].message);
   }
   return data.data.activeDailyCodingChallengeQuestion;
-}
-
-export async function createDailyMsg() {
-  const db = getDB();
-  const dailyProb = await getDaily();
-  const link = "https://leetcode.com" + dailyProb.link;
-  const msg =
-    "**Title:** " +
-    dailyProb.question.title +
-    "\n**Difficulty:** " +
-    dailyProb.question.difficulty +
-    "\n**Link:** " +
-    link;
-  const [year, month, day] = dailyProb.date.split("-"); // YYYY-MM-DD
-  const greeting = await getHoliday(month, day);
-  const intToMonth = {
-    "01": "Jan",
-    "02": "Feb",
-    "03": "Mar",
-    "04": "Apr",
-    "05": "May",
-    "06": "Jun",
-    "07": "Jul",
-    "08": "Aug",
-    "09": "Sep",
-    10: "Oct",
-    11: "Nov",
-    12: "Dec",
-  };
-  const threadTitle =
-    "LC Daily (" + intToMonth[month] + " " + day + "th " + year + ")";
-  // by the time this function runs we will have already done the verification of who finished problems so we can add stuff easily
-  db.today = dailyProb.date; // today: "YYYY-MM-DD"
-  db.history[dailyProb.date] = {
-    link: link,
-    titleSlug: dailyProb.question.titleSlug,
-    greeting: greeting,
-    completedBy: {},
-  };
-  saveDB();
-  return [greeting, msg, threadTitle];
 }
 
 // now For an array of usernames I want to send a request for each username to check if they completed the question

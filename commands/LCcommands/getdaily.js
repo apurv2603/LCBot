@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import { createDailyMsg } from "../../services/leetcode.js";
+import { createDailyMsg } from "../../services/daily.js";
 export const data = new SlashCommandBuilder()
   .setName("getdaily")
   .setDescription("Gets the Daily problem");

@@ -1,25 +1,12 @@
 {
-  "today": "2026-01-17",
-  "groupStreak": 1,
-  "users": {
-    "801820390397575209": {
-      "lc": "apurvsinghdeo",
-      "streak": 1
-    }
-  },
+  "today": "2026-01-18",
+  "groupStreak": 0,
+  "users": {},
   "history": {
-    "2026-01-14": {
-      "link": "https://leetcode.com/problems/separate-squares-ii/",
-      "titleSlug": "separate-squares-ii",
-      "greeting": "Happy Christian feast day:\nMacrina the Elder!",
-      "completedBy": {
-        "801820390397575209": true
-      }
-    },
-    "2026-01-17": {
-      "link": "https://leetcode.com/problems/find-the-largest-area-of-square-inside-two-rectangles/",
-      "titleSlug": "find-the-largest-area-of-square-inside-two-rectangles",
-      "greeting": "Happy National Day (Menorca, Spain)!",
+    "2026-01-18": {
+      "link": "https://leetcode.com/problems/largest-magic-square/",
+      "titleSlug": "largest-magic-square",
+      "greeting": "Happy Christian feast day:\nMargaret of Hungary!",
       "completedBy": {}
     }
   }

@@ -1,29 +1,29 @@
 import cron from "node-cron";
 import { sendDaily } from "./daily.js";
-import { checkup } from "./checkup.js";
-let pingTask = null;
-let pongTask = null;
+import { sendCompletionMsg } from "./checkup.js";
+let dailyProblemTask = null;
+let checkUpTask = null;
 
 export function startPingScheduler(client) {
-  if (pingTask && pongTask) return; // already running
+  if (dailyProblemTask && checkUpTask) return; // already running
 
   // Example: run every day at 9:00 AM Dubai time
-  if (!pingTask) {
-    pingTask = cron.schedule(
+  if (!checkUpTask) {
+    checkUpTask = cron.schedule(
       "*/1 * * * *",
       async () => {
-        await sendDaily(client);
+        await sendCompletionMsg(client);
       },
       {
         timezone: "Asia/Dubai",
       },
     );
   }
-  if (!pongTask) {
-    pongTask = cron.schedule(
+  if (!dailyProblemTask) {
+    dailyProblemTask = cron.schedule(
       "*/1 * * * *",
       async () => {
-        await checkup(client);
+        await sendDaily(client);
       },
       {
         timezone: "Asia/Dubai",
