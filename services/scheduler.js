@@ -10,7 +10,7 @@ export function startPingScheduler(client) {
   // Example: run every day at 9:00 AM Dubai time
   if (!checkUpTask) {
     checkUpTask = cron.schedule(
-      "0 19 * * * *", // 7:00 PM
+      "0 5 19 * * *", // 7:05 PM
       async () => {
         await sendCompletionMsg(client);
       },
@@ -21,7 +21,7 @@ export function startPingScheduler(client) {
   }
   if (!dailyProblemTask) {
     dailyProblemTask = cron.schedule(
-      "0 19 * * * *", // 7:00 PM
+      "0 5 19 * * *", // 7:05 PM
       async () => {
         await sendDaily(client);
       },
