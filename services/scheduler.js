@@ -10,23 +10,23 @@ export function startPingScheduler(client) {
   // Example: run every day at 9:00 AM Dubai time
   if (!checkUpTask) {
     checkUpTask = cron.schedule(
-      "*/1 * * * *",
+      "0 19 * * * *", // 7:00 PM
       async () => {
         await sendCompletionMsg(client);
       },
       {
-        timezone: "Asia/Dubai",
+        timezone: "America/New_York",
       },
     );
   }
   if (!dailyProblemTask) {
     dailyProblemTask = cron.schedule(
-      "*/1 * * * *",
+      "0 19 * * * *", // 7:00 PM
       async () => {
         await sendDaily(client);
       },
       {
-        timezone: "Asia/Dubai",
+        timezone: "America/New_York",
       },
     );
   }
