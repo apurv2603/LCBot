@@ -46,9 +46,9 @@ export async function createDailyMsg() {
 export async function sendDaily(client) {
   const channelId = process.env.CHANNEL_ID;
   const channel = await client.channels.fetch(channelId);
-  const [greeting, reply, title] = await createDailyMsg();
+  const [greeting, dailyQuestion, title] = await createDailyMsg();
 
-  const message = await channel.send(greeting);
+  const message = await channel.send(dailyQuestion);
   const thread = await message.startThread({ name: title });
-  await thread.send(reply);
+  await thread.send(greeting);
 }
